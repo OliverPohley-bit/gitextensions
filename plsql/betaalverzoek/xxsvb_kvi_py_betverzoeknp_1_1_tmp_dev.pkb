@@ -200,19 +200,23 @@ create or replace package body  xxsvb_kvi_py_betverzoeknp_1_1_tmp_dev as
       i := pr_betaalverzoek.declaratieregels.next(i);
 
     end loop;
-   -- commit;
+    commit;
 
     xc_return_status := lc_return_status;
   exception
     when xxsvb_globals.ge_error then
+      rollback;
       xxsvb_utl_exceptions.raise_error(gnc_error, gcc_package_name, lcc_unit, xc_error_code, xc_error_text, xc_message);
       xc_return_status := gcc_ret_sts_error;
     when xxsvb_globals.ge_unexpected_error then
+      rollback;
       xxsvb_utl_exceptions.raise_error(gnc_unexpected, gcc_package_name, lcc_unit, xc_error_code, xc_error_text, xc_message);
       xc_return_status := gcc_ret_sts_unexp_error;
     when xxsvb_globals.ge_fatal then
+      rollback;
       raise;
     when others then
+      rollback;
       if sqlcode = -20030
       then
         raise xxsvb_globals.ge_fatal;
