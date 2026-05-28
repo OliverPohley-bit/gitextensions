@@ -993,7 +993,7 @@ create or replace package body  xxsvb_kvi_py_betverzoeknp_1_1_tmp_dev as
     lc_error_code varchar2(30);
     lc_error_text varchar2(2000);
     lc_message       varchar2(4000);
-    lr_betaalverzoek xxsvb_kvi_py_betverzoeknp_1_1.grt_pay_betaalverzoek;
+    lr_betaalverzoek xxsvb_kvi_py_betverzoeknp_1_1_tmp_dev.grt_pay_betaalverzoek;
     lr_verwachte_betaaldatum date;
     lc_fnd_message varchar2(4000);
     lb_fout boolean := false;
