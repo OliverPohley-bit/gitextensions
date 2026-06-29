@@ -72,7 +72,7 @@ CREATE OR REPLACE PACKAGE pkg_payroll_compare AUTHID CURRENT_USER AS
   -- ===========================================================================
 
   -- Verwijder een Fast Formula volledig uit de lokale database
-  -- (FF_FORMULA_TEXT + FF_FORMULAS_F, alle effectieve datumrijen)
+  -- (FF_FORMULAS_F, alle effectieve datumrijen)
   PROCEDURE remove_fast_formula(
     p_formula_name  IN VARCHAR2
   );

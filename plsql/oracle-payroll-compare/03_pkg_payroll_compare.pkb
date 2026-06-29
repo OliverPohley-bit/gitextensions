@@ -1265,14 +1265,12 @@ CREATE OR REPLACE PACKAGE BODY pkg_payroll_compare AS
 
   -- ===========================================================================
   -- BEHEER: Verwijder Fast Formula uit lokale database
-  -- Tabellen: FF_FORMULA_TEXT (eerst), FF_FORMULAS_F
-  -- Alle effectieve datumrijen worden verwijderd.
+  -- Tabel: FF_FORMULAS_F (alle effectieve datumrijen)
   -- ===========================================================================
   PROCEDURE remove_fast_formula(
     p_formula_name  IN VARCHAR2
   ) IS
     v_formula_id  FF_FORMULAS_F.FORMULA_ID%TYPE;
-    v_text_cnt    PLS_INTEGER;
     v_def_cnt     PLS_INTEGER;
   BEGIN
     p_log('Verwijderen Fast Formula: ' || p_formula_name);
@@ -1289,15 +1287,10 @@ CREATE OR REPLACE PACKAGE BODY pkg_payroll_compare AS
         RETURN;
     END;
 
-    DELETE FROM ff_formula_text
-    WHERE  formula_id = v_formula_id;
-    v_text_cnt := SQL%ROWCOUNT;
-    p_log('  FF_FORMULA_TEXT rijen verwijderd : ' || v_text_cnt);
-
     DELETE FROM ff_formulas_f
     WHERE  formula_id = v_formula_id;
     v_def_cnt := SQL%ROWCOUNT;
-    p_log('  FF_FORMULAS_F rijen verwijderd   : ' || v_def_cnt);
+    p_log('  FF_FORMULAS_F rijen verwijderd: ' || v_def_cnt);
 
     COMMIT;
     p_log('  Klaar.');
