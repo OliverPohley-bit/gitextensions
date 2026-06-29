@@ -68,6 +68,16 @@ CREATE OR REPLACE PACKAGE pkg_payroll_compare AUTHID CURRENT_USER AS
   PROCEDURE compare_responsibilities;    -- FND_RESPONSIBILITY_VL + toewijzingen
 
   -- ===========================================================================
+  -- BEHEER
+  -- ===========================================================================
+
+  -- Verwijder een Fast Formula volledig uit de lokale database
+  -- (FF_FORMULA_TEXT + FF_FORMULAS_F, alle effectieve datumrijen)
+  PROCEDURE remove_fast_formula(
+    p_formula_name  IN VARCHAR2
+  );
+
+  -- ===========================================================================
   -- RAPPORTAGE
   -- ===========================================================================
 
